@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp/core/constants/colors.dart';
+import 'package:whatsapp/core/constants/constants.dart';
 import 'package:whatsapp/widgets/chat_list.dart';
 import 'package:whatsapp/widgets/contacts_list.dart';
 import 'package:whatsapp/widgets/web_chat_app_bar.dart';
@@ -34,7 +34,7 @@ class WebLayoutScreen extends StatelessWidget {
               ),
               image: DecorationImage(
                 image: AssetImage(
-                  "assets/backgroundImage.png",
+                  AppImages.backgroundImage
                 ),
                 fit: BoxFit.cover,
               ),
