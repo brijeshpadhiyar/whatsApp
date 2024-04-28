@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
 import 'package:whatsapp/core/constants/colors.dart';
+import 'package:whatsapp/core/routes/routes.dart';
 import 'package:whatsapp/features/landing/screens/landing_screen.dart';
 import 'package:whatsapp/firebase_options.dart';
 
@@ -10,7 +13,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,19 +21,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return MaterialApp(
-          title: 'Whatsapp',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
+    return ResponsiveSizer(builder: (context, orientation, deviceType) {
+      return MaterialApp.router(
+        title: 'Whatsapp',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
             scaffoldBackgroundColor: AppColor.backgroundColor,
             colorScheme: const ColorScheme.dark(),
             brightness: Brightness.dark,
-          ),
-          home: const LandingScreen()
-        );
-      }
-    );
+            appBarTheme: const AppBarTheme(
+              color: AppColor.appBarColor,
+            )),
+            routerConfig: AppRoutes.router,
+        
+      );
+    });
   }
 }
