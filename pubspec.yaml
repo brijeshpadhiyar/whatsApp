@@ -46,6 +46,7 @@ dependencies:
   google_sign_in: ^6.2.1
   dartz: ^0.10.1
   image_picker: ^1.1.0
+  flutter_contacts: ^1.1.7+1
 
 dev_dependencies:
   flutter_test:

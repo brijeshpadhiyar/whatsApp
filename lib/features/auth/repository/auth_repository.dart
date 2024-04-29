@@ -1,11 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -27,6 +24,15 @@ class AuthRepository {
     required FirebaseFirestore firestore,
   })  : _auth = auth,
         _firestore = firestore;
+
+  Future<UserModel?> getCurrentUserData() async {
+    UserModel? userModel;
+    var userData = await _firestore.collection("users").doc(_auth.currentUser!.uid).get();
+    if (userData.data() != null) {
+      userModel = UserModel.fromMap(userData.data()!);
+    }
+    return userModel;
+  }
 
   void signInWithPhone(BuildContext context, String phoneNumber) async {
     try {
@@ -102,8 +108,8 @@ class AuthRepository {
         uid: uid,
         profilePic: profileUrl,
         isOnline: true,
-        email: _auth.currentUser!.email!,
-        gropId: [],
+        number: _auth.currentUser!.phoneNumber!,
+        gropId: <String>[],
       );
       await _firestore.collection("users").doc(uid).set(user.toMap());
       context.go(AppRoutes.mobileScreen);

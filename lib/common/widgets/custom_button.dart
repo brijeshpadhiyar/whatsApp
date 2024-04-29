@@ -11,10 +11,9 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColor.tabColor,
-          minimumSize: const Size(double.infinity, 50),
-          shape: RoundedRectangleBorder()
-        ),
+            backgroundColor: AppColor.tabColor,
+            minimumSize: const Size(double.infinity, 50),
+            shape: const RoundedRectangleBorder()),
         child: Text(
           text,
           style: const TextStyle(

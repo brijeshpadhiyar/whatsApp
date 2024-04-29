@@ -5,10 +5,10 @@ class UserModel {
   final String uid;
   final String profilePic;
   final bool isOnline;
-  final String email;
-  final List<String> gropId;
+  final String number;
+  final List<dynamic> gropId;
 
-  UserModel({required this.name, required this.uid, required this.profilePic, required this.isOnline, required this.email, required this.gropId});
+  UserModel({required this.name, required this.uid, required this.profilePic, required this.isOnline, required this.number, required this.gropId});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -16,7 +16,7 @@ class UserModel {
       'uid': uid,
       'profilePic': profilePic,
       'isOnline': isOnline,
-      'email': email,
+      'number': number,
       'gropId': gropId,
     };
   }
@@ -27,8 +27,8 @@ class UserModel {
       uid: map['uid'] as String,
       profilePic: map['profilePic'] as String,
       isOnline: map['isOnline'] as bool,
-      email: map['email'] as String,
-      gropId: List<String>.from((map['gropId'] as List<String>),
+      number: map['number'] as String,
+      gropId: List<dynamic>.from((map['gropId'] as List<dynamic>),
     ));
   }
 

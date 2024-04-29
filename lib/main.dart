@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,7 +7,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:whatsapp/core/constants/colors.dart';
 import 'package:whatsapp/core/routes/routes.dart';
-import 'package:whatsapp/features/landing/screens/landing_screen.dart';
 import 'package:whatsapp/firebase_options.dart';
 
 void main() async {
@@ -16,11 +17,11 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ResponsiveSizer(builder: (context, orientation, deviceType) {
       return MaterialApp.router(
         title: 'Whatsapp',
@@ -32,8 +33,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(
               color: AppColor.appBarColor,
             )),
-            routerConfig: AppRoutes.router,
-        
+        routerConfig: AppRoutes.router,
       );
     });
   }
