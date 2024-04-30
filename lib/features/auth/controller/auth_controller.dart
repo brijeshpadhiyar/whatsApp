@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp/features/auth/repository/auth_repository.dart';
@@ -14,12 +15,20 @@ final userDataProvider = FutureProvider<UserModel?>((ref) async {
   return await ref.watch(authControllerProvider).getCurrentUserData();
 });
 
+final userCeckProvider = FutureProvider<User?>((ref) {
+  return ref.watch(authControllerProvider).userCeck();
+});
+
 class AuthController {
   final AuthRepository _authRepository;
   final ProviderRef _ref;
   AuthController({required AuthRepository authRepository, required ProviderRef ref})
       : _authRepository = authRepository,
         _ref = ref;
+
+  Future<User?> userCeck() async {
+    return await _authRepository.userCeck();
+  }
 
   Future<UserModel?> getCurrentUserData() async {
     UserModel? user = await _authRepository.getCurrentUserData();

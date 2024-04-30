@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,6 +25,14 @@ class AuthRepository {
     required FirebaseFirestore firestore,
   })  : _auth = auth,
         _firestore = firestore;
+
+  Future<User?> userCeck() async{
+    Completer<User?> completer = Completer<User?>();
+    _auth.userChanges().listen((user) {
+      completer.complete(user);
+    });
+    return completer.future;
+  }
 
   Future<UserModel?> getCurrentUserData() async {
     UserModel? userModel;

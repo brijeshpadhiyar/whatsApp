@@ -11,7 +11,7 @@ class OnBordingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(userDataProvider).when(
+    return ref.watch(userCeckProvider).when(
         data: (data) {
           if (data == null) {
             return const LandingScreen();
